@@ -2,10 +2,18 @@ package d17;
 
 public class Zmogus {
 
-    String vardas; // = null
-    String pavarde; // = null
+    public String vardas; // = null
+    public String pavarde; // = null
 
-//    Zmogus() {
-//        vardas = "Jonas";
-//    }
+    Zmogus() {
+    }
+
+    Zmogus(String vardas, String pavarde) {
+        this.vardas = vardas;
+        this.pavarde = pavarde;
+    }
+
+    Zmogus(String vardas) {
+        this.vardas = vardas;
+    }
 }
