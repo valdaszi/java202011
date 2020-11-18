@@ -43,14 +43,31 @@ public class Main {
         }
 
 
-        Mokinys m1 = new Mokinys();
-        m1.vardas = "Antanukas";
-        m1.pavarde = "Bumbuliukas";
-        m1.klase = 1;
+        Mokinys m1 = new Mokinys("Antanukas", "Bumbuliukas", 1, null);
 
         System.out.println("m1 " + Utilities.kasYraKas(m1));
 
         //Utilities.spausdintiZmogu(m1);
 
+        Mokinys m3 = new Mokinys("Petras", "Petraitis");
+
+//        Mokinys m2 = new Mokinys(null, null, 0, null);
+//        System.out.println("mokinys su tusciu vardu sukurtas sekmingai!!!");
+
+//        Zmogus zy2 = new Zmogus("", null);
+//        System.out.println("zmogus su tusciu vardu sukurtas sekmingai!!!");
+//
+//        Zmogus zy = new Zmogus(null);
+//        System.out.println("zmogus su null vardu sukurtas sekmingai!!!");
+//
+//        Zmogus zx = new Zmogus(null, null);
+//        System.out.println("zmogus su null vardu ir null pavarde sukurtas sekmingai!!!");
+
+        // Standartiniu java klaidu pavyzdziai:
+//        double x[] = { 100,  0};
+//        System.out.println(x[2]);
+//
+
+        System.out.println("The End.");
     }
 }
