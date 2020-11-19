@@ -1,6 +1,6 @@
 package d19.d1;
 
-public class Figura {
+public abstract class Figura {
 
     private double x;
     private double y;
@@ -12,13 +12,17 @@ public class Figura {
         this.laipsnis = laipsnis;
     }
 
-    public double plotas() {
-        return 0;
-    }
+    public abstract double plotas();
 
-    public double perimetras() {
-        return 0;
-    }
+    public abstract double perimetras();
+
+//    public double plotas() {
+//        return 0;
+//    }
+//
+//    public double perimetras() {
+//        return 0;
+//    }
 
     public double getX() {
         return x;
