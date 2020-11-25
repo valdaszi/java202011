@@ -1,9 +1,11 @@
 package d24_25;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Meteo implements Comparable<Meteo> { // extends Object {
 
+    private LocalDateTime laikas;
     private Double temperatura;
     private int vejoKryptis;
     private double vejoStiprumas;
@@ -17,6 +19,22 @@ public class Meteo implements Comparable<Meteo> { // extends Object {
         this.vejoKryptis = vejoKryptis;
         this.vejoStiprumas = vejoStiprumas;
         this.krituliai = krituliai;
+    }
+
+    public Meteo(LocalDateTime laikas, Double temperatura, int vejoKryptis, double vejoStiprumas, int krituliai) {
+        this.laikas = laikas;
+        this.temperatura = temperatura;
+        this.vejoKryptis = vejoKryptis;
+        this.vejoStiprumas = vejoStiprumas;
+        this.krituliai = krituliai;
+    }
+
+    public LocalDateTime getLaikas() {
+        return laikas;
+    }
+
+    public void setLaikas(LocalDateTime laikas) {
+        this.laikas = laikas;
     }
 
     public Double getTemperatura() {
@@ -92,5 +110,21 @@ public class Meteo implements Comparable<Meteo> { // extends Object {
     public int compareTo(Meteo o) {
         System.out.println("??? compareTo");
         return 0;
+    }
+
+//    @Override
+//    public String toString() {
+//        return laikas + ", vejoKryptis=" + vejoKryptis;
+//    }
+
+    @Override
+    public String toString() {
+        return "Meteo{" +
+                "laikas=" + laikas +
+                ", temperatura=" + temperatura +
+                ", vejoKryptis=" + vejoKryptis +
+                ", vejoStiprumas=" + vejoStiprumas +
+                ", krituliai=" + krituliai +
+                '}';
     }
 }
