@@ -1,6 +1,6 @@
-package d24.d2;
+package d24_25.d2;
 
-import d24.Meteo;
+import d24_25.Meteo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +19,7 @@ public class Listai {
 
         meteos.add(meteo);
         meteos.add(meteo);
+        meteos.add(null);
         meteos.addAll(Arrays.asList(meteo, meteo, meteo));
 
 //        meteos.add(new Meteo[] { meteo, meteo, meteo });
@@ -30,6 +31,7 @@ public class Listai {
         System.out.println(m.getKrituliai() + "mm");
 
         for (Meteo e : meteos) {
+            if (e == null) continue;
             System.out.println(
                     e.getKrituliai() + "mm, " +
                             e.getVejoKryptis() + "°");

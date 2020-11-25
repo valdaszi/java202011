@@ -1,4 +1,4 @@
-package d24;
+package d24_25;
 
 public class Kolekcija implements IKolekcija {
 
