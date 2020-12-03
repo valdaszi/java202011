@@ -40,7 +40,12 @@ public class StreamDemo3 {
         Map<Employee, Double> map2 = salaries.stream()
                 .collect(
                         Collectors.groupingBy(s -> s.getEmployee(),
-                        Collectors.reducing(0.0, (Salary s) -> s.getSalary(), (x, y) -> x + y)));
+                        Collectors.reducing(0.0,
+                                (Salary s) -> s.getSalary(),
+                                (suma, e) -> {
+                                    System.out.println(suma + " + " + e + " = " + (suma + e));
+                                    return suma + e;
+                                })));
         System.out.println(map2);
 
     }
