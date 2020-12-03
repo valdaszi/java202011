@@ -48,5 +48,40 @@ public class StreamDemo3 {
                                 })));
         System.out.println(map2);
 
+
+        Map<Employee, A> map3 = salaries.stream()
+                .collect(
+                        Collectors.groupingBy(s -> s.getEmployee(),
+                                Collectors.reducing(new A(),
+                                        (Salary s) -> new A(s.getSalary()),
+                                        (suma, e) -> {
+                                            A result = new A();
+                                            result.d1 = suma.d1 + e.d1;
+                                            result.d2 = suma.d2 + e.d2;
+                                            System.out.println(suma + " + " + e + " = " + result);
+                                            return result;
+                                        })));
+        System.out.println(map3);
+
+    }
+}
+
+class A {
+    double d1;
+    double d2;
+
+    public A() {}
+
+    public A(double x) {
+        if (x < 500) d1 = x;
+        else d2 = x;
+    }
+
+    @Override
+    public String toString() {
+        return "A{" +
+                "d1=" + d1 +
+                ", d2=" + d2 +
+                '}';
     }
 }
