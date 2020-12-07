@@ -18,7 +18,7 @@ public class OptionalDemo {
         System.out.println(i);
 
         i = Optional.ofNullable(null);
-        System.out.println(i.isEmpty());
+        System.out.println(!i.isPresent());
     }
 
     static Optional<Integer> rastiPirma(List<Integer> listas, Predicate<Integer> f) {
