@@ -1,4 +1,4 @@
-package e08;
+package e08_09;
 
 public class ExceptionDemo2 {
 

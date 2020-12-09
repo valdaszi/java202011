@@ -1,4 +1,4 @@
-package e08;
+package e08_09;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
