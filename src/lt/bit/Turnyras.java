@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * Ka mes turime gauti, jei pvz turim 7 zaidejus:
- * 1 Turas:
+ * 1 Turas/Round:
  *      1) Jonas - Petras
  *      2) Kazys - Ona
  *      3) Maryte - Antanas
@@ -34,86 +34,55 @@ import java.util.Random;
 public class Turnyras {
 
     private final InputStream is;
-    private final OutputStream out;
+    // private final OutputStream out;
+    private final PrintStream print;
 
 
-    public Turnyras(InputStream is, OutputStream out) {
+    public Turnyras(InputStream is, OutputStream out) throws UnsupportedEncodingException {
         this.is = is;
-        this.out = out;
+        // this.out = out;
+        print = new PrintStream(out, true, "UTF-8");
     }
 
     public void execute() {
-        List<String> players = read(this.is);
+        List<IParticipantName> players = TournamentUtils.read(this.is);
         System.out.println(players);
 
-        players = randomize(players);
+        players = TournamentUtils.randomize(players);
         System.out.println(players);
 
-        int roundsCount = rounds(players.size());
+        int roundsCount = TournamentUtils.rounds(players.size());
         System.out.println("Viso turu yra " + roundsCount);
-    }
 
-    private List<String> read(InputStream is) {
-        List<String> players = new ArrayList<>();
+        print.println("Turnyrine lentele");
+        for (int currentRound = 1; currentRound <= roundsCount; currentRound++) {
+            print.println(currentRound + " Turas:");
 
-        try (
-                InputStreamReader reader = new InputStreamReader(new BufferedInputStream(is),
-                        "UTF-8");
-        ) {
+            int playersTotal = players.size();
 
-            int c;
-            StringBuilder sb = new StringBuilder();
-            while ((c = reader.read()) != -1) {
-                sb.append((char) c);
-                if (c == '\n') {
-                    String name = sb.toString();
-                    if (name.trim().length() > 0) {
-                        players.add(name.trim());
-                    }
-                    sb = new StringBuilder();
-                }
+            int toNextRound = TournamentUtils.playersCountInNextRound(playersTotal);
+            int inCurrentRound = playersTotal - toNextRound;
+
+            List<Pair> round = new ArrayList<>();
+            for (int i = 0; i < inCurrentRound; i += 2) {
+                Pair pair = new Pair(players.get(i), players.get(i + 1));
+                round.add(pair);
+
+                print.println("   " + pair.content());
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            // pasiruosti sekanciam turui
+            List<IParticipantName> nextRoundPlayers = new ArrayList<>();
+            // perkeliam i sekanti tura nezaidusius zaidejus
+            for (int i = inCurrentRound; i < playersTotal; i++) {
+                nextRoundPlayers.add(players.get(i));
+            }
+            // perkeliam poru nugaletojus
+            round.forEach(p -> nextRoundPlayers.add(p));
+
+            // pakeiciu zaideju sarasa nauju
+            players = nextRoundPlayers;
         }
-
-        return players;
-    }
-
-    private List<String> randomize(List<String> list) {
-        Random random = new Random();
-        for (int i = 0; i < list.size() * 2; i++) {
-            int index = random.nextInt(list.size());
-            String name = list.remove(index);
-            list.add(0, name);
-        }
-        return list;
-    }
-
-    //  2  - 1
-    //  3 4  - 2
-    //  5 6 7 8 - 3
-    //  9 10 11 12 13 14 15 16 - 4
-    protected int rounds(int totalPlayers) {
-        if (totalPlayers <= 1) return 0;
-
-        int playersCount = 2;
-        int roundCount = 1;
-        while (playersCount < totalPlayers) {
-            playersCount *= 2;
-            roundCount++;
-        }
-        return roundCount;
-    }
-
-    //
-    protected int playersCountInNextRound(int totalPlayers) {
-        if (totalPlayers <= 2) return 0;
-        int roundsCount = rounds(totalPlayers);
-        int maxPlayers = (int) Math.pow(2, roundsCount);
-        int nextRoundPlayers = maxPlayers - totalPlayers;
-        return nextRoundPlayers;
     }
 
 }

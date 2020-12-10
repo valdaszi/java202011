@@ -31,7 +31,13 @@ public class TurnyrasUzdavinys {
             os = System.out;
         }
 
-        Turnyras turnyras = new Turnyras(is, os);
+        Turnyras turnyras = null;
+        try {
+            turnyras = new Turnyras(is, os);
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("Klaida kuriant Turnyras");
+            return;
+        }
         turnyras.execute();
 
         System.out.println("Pabaiga.");
