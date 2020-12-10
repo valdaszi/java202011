@@ -1,4 +1,4 @@
-package e08_09;
+package lt.bit;
 
 import java.io.*;
 
